@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import kevat25.harjoitus2.domain.Friend;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @Controller
 public class FriendController {
@@ -26,8 +28,14 @@ public class FriendController {
     @PostMapping("/add")
     public String saveFriend(Friend friend){
         friendList.add(friend);
-        return "redirect:/friends";
+        return "redirect:/success";
     }
+
+    @GetMapping("/success")
+    public String showSuccess() {
+        return "success";
+    }
+    
 
     @GetMapping("/friends")
     public String showStudents(Model model) {
