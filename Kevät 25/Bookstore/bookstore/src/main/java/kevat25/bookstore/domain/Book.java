@@ -1,9 +1,18 @@
 package kevat25.bookstore.domain;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
 public class Book {
-    String title, author;
-    int publicationYear, isbn;
-    float price;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    private String title, author, isbn;
+    private int publicationYear;
+    private double price;
     
     
     
@@ -12,7 +21,7 @@ public class Book {
 
 
 
-    public Book(String title, String author, int publicationYear, int isbn, float price) {
+    public Book(String title, String author, int publicationYear, String isbn, double price) {
         this.title = title;
         this.author = author;
         this.publicationYear = publicationYear;
@@ -20,7 +29,15 @@ public class Book {
         this.price = price;
     }
 
+    public Long getId() {
+        return id;
+    }
 
+
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getTitle() {
         return title;
@@ -58,25 +75,25 @@ public class Book {
 
 
 
-    public int getIsbn() {
+    public String getIsbn() {
         return isbn;
     }
 
 
 
-    public void setIsbn(int isbn) {
+    public void setIsbn(String isbn) {
         this.isbn = isbn;
     }
 
 
 
-    public float getPrice() {
+    public double getPrice() {
         return price;
     }
 
 
 
-    public void setPrice(float price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
@@ -84,9 +101,13 @@ public class Book {
 
     @Override
     public String toString() {
-        return "Book [title=" + title + ", author=" + author + ", publicationYear=" + publicationYear + ", isbn=" + isbn
+        return "Book [id=" + id + ",title=" + title + ", author=" + author + ", publicationYear=" + publicationYear + ", isbn=" + isbn
                 + ", price=" + price + "]";
     }
+
+
+
+
 
     
 
