@@ -8,6 +8,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import kevat25.bookstore.domain.AppUser;
+import kevat25.bookstore.domain.AppUserRepository;
 import kevat25.bookstore.domain.Book;
 import kevat25.bookstore.domain.BookRepository;
 import kevat25.bookstore.domain.Category;
@@ -23,7 +25,7 @@ public class BookstoreApplication {
 	}
 
 	@Bean
-	public CommandLineRunner demoData(BookRepository bRepo, CategoryRepository cRepo){
+	public CommandLineRunner demoData(BookRepository bRepo, CategoryRepository cRepo, AppUserRepository aRepo){
 		return (args) -> {
 			log.info("Tallenna kategoriat");
 
@@ -34,6 +36,12 @@ public class BookstoreApplication {
 			cRepo.save(category1);
 			cRepo.save(category2);
 			cRepo.save(category3);
+
+			// Create users: admin/admin user/user
+			AppUser user1 = new AppUser("user", "$2a$06$3jYRJrg0ghaaypjZ/.g4SethoeA51ph3UD4kZi9oPkeMTpjKU5uo6","user@user.com", "USER");
+			AppUser user2 = new AppUser("admin", "$2a$10$0MMwY.IQqpsVc1jC8u7IJ.2rT8b0Cd3b3sfIBGV2zfgnPGtT4r0.C","admin@admin.com", "ADMIN");
+			aRepo.save(user1);
+			aRepo.save(user2);
 
 
 
