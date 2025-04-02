@@ -1,0 +1,161 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Näytä Lento</title>
+
+    
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+   
+    <style>
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            padding-top: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #343a40;
+            margin-bottom: 30px;
+        }
+
+        
+        .table {
+            width: 80%;
+            margin: 0 auto;
+            margin-bottom: 30px;
+        }
+
+        .table th, .table td {
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .table th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .table td {
+            background-color: #f1f1f1;
+        }
+
+        
+        #map {
+            width: 100%;
+            height: 400px;
+            margin: 0 auto;
+            border: 2px solid #007bff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+
+        
+        .card {
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        
+        .btn {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            text-transform: uppercase;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 14px;
+            color: #6c757d;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Näytä Lento</h1>
+
+        
+        <div class="card">
+            <table class="table table-striped">
+                <tr>
+                    <th>Päivämäärä</th>
+                    <th>Kellonaika</th>
+                    <th>Lentäjä</th>
+                    <th>Lentopaikka</th>
+                    <th>Kaupunki</th>
+                    <th>Pohjoinen</th>
+                    <th>Itä</th>
+                    <th>Lämpötila</th>
+                </tr>
+                <tr>
+                    <td th:text="${lento.pvm}"></td>
+                    <td th:text="${lento.aika}"></td>
+                    <td th:text="${lento.lentaja}"></td>
+                    <td th:text="${lento.lentopaikka.nimi}"></td>
+                    <td th:text="${lento.lentopaikka.kaupunki}"></td>
+                    <td th:text="${lento.lentopaikka.northing}"></td>
+                    <td th:text="${lento.lentopaikka.easting}"></td>
+                    <td th:text="${lento.lampoTila} + ' °C'"></td>
+                </tr>
+            </table>
+        </div>
+
+        
+        <div id="map"></div>
+
+        <a href="/lentolista" class="btn back-btn">Takaisin</a>
+
+        
+        <footer>
+            <p>&copy; 2025 Panu Peltola.</p>
+        </footer>
+
+    </div>
+
+    
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script type="text/javascript">
+        var northing = [[${lento.lentopaikka.northing}]];
+        var easting = [[${lento.lentopaikka.easting}]];
+
+        
+        var map = L.map('map').setView([northing, easting], 13);
+
+        
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        
+        var marker = L.marker([northing, easting]).addTo(map);
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,24 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-Harjoitus1Application<harjoitus1>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "kevat25.harjoitus1.Harjoitus1Application",
+            "projectName": "harjoitus1",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-Harjoitus2Application<harjoitus2>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "kevat25.harjoitus2.Harjoitus2Application",
+            "projectName": "harjoitus2",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+<head>
+    <title>Lentolista</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+	<h1>Tehdyt lennot</h1>
+
+    <table class="table table-striped">
+		<tr>
+		    <th>Päviämäärä</th>
+            <th>Kellonaika </th>
+            <th>Lentäjä</th>
+            <th>Lentopaikka</th>
+            <th>Kaupunki</th>
+            <th>Pohjoinen</th>
+            <th>Itä</th>
+            <th>Lämpötila</th>
+		</tr>  
+    	<tr th:each = "lento : ${lennot}">
+    		<td th:text="${lento.pvm}"></td>
+            <td th:text="${lento.aika}"></td>
+            <td th:text="${lento.lentaja}"></td>
+            <td th:text="${lento.lentopaikka.nimi}"></td>
+            <td th:text="${lento.lentopaikka.kaupunki}"></td>
+            <td th:text="${lento.lentopaikka.northing}"></td>
+            <td th:text="${lento.lentopaikka.easting}"></td>
+            <td th:text="${lento.lampoTila} + ' °C'"></td>
+
+            <td><a th:href="@{/nayta/{id}(id=${lento.id})}" class="btn btn-success">Näytä</a></td>
+            <td><a th:href="@{/muokkaa/{id}(id=${lento.id})}" class="btn btn-secondary">Muokkaa</a></td>
+            
+            
+            
+
+
+    		 		
+    	</tr>
+     </table>
+
+     <td ><a th:href="@{/lisaalento}" class="btn btn-success">Lisää lento</a></td>
+     <td ><a th:href="@{/lisaalentopaikka}" class="btn btn-success">Lisää lentopaikka</a></td>
+
+     	
+
+</body>
+</html>

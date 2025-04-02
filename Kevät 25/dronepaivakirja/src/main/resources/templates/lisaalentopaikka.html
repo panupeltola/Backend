@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lentolista</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Lisää lentopaikka</h1>
+	<div>
+		<form th:object="${lentopaikka}" th:action="@{/tallennalentopaikka}" action="#" method="post">
+		  	<label for="tname">Nimi</label>
+			<input type="text" id="lpname" th:field="*{nimi}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+		  	<label for="aname">Kaupunki</label>
+			<input type="text" id="kaupunki" th:field="*{kaupunki}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+		  	<label for="pyear">Pohjoinen</label>
+			<input type="text" th:field="*{northing}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+            <label for="isbn">Itä</label>
+			<input type="text" th:field="*{easting}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+
+
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<input type="submit" value="Tallenna"></input>
+		</form>
+	</div>
+</body>
+</html>

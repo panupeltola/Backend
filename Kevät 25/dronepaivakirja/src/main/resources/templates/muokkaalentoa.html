@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lentolista</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Muokkaa lentoa</h1>
+	<div>
+		<form th:object="${lento}" th:action="@{/tallennalento}" action="#" method="post">
+		  	<label for="tname">Lentaja</label>
+			<input type="text" id="lname" th:field="*{lentaja}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+		  	<label for="aname">Päivämäärä</label>
+			<input type="text" id="pvm" th:field="*{pvm}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+		  	<label for="pyear">Aika</label>
+			<input type="text" th:field="*{aika}" />
+
+            <div style="clear: both; display: block; height: 10px;"></div>						
+		  	<label for="catlist">Lentopaikka</label>
+			 <select id="catlist" th:field="*{lentopaikka}" class="form-control">
+       			<option th:each="lentopaikka: ${lentopaikat}" th:value="${lentopaikka.lentopaikkaId}" th:text="${lentopaikka.nimi}"></option>
+    		</select>
+
+			<div style="clear: both; display: block; height: 10px;"></div>
+            <label for="isbn">Lämpötila</label>
+			<input type="text" th:field="*{lampoTila}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+
+
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<input type="submit" value="Tallenna"></input>
+		</form>
+	</div>
+</body>
+</html>
