@@ -20,7 +20,6 @@ public class WebSecurityConfig {
 	private UserDetailServiceImpl userDetailsService;
 
 	private static final AntPathRequestMatcher[] WHITE_LIST_URLS = { 
-			new AntPathRequestMatcher("/api/students**"),
 			new AntPathRequestMatcher("/h2-console/**") };
 
 	@Bean

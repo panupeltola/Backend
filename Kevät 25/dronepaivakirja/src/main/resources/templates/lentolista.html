@@ -32,7 +32,7 @@
 
             <td><a th:href="@{/nayta/{id}(id=${lento.id})}" class="btn btn-success">Näytä</a></td>
             <td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/muokkaa/{id}(id=${lento.id})}" class="btn btn-secondary">Muokkaa</a></td>
-            <td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{id}(id=${book.id})}" class="btn btn-danger">Poista</a></td>
+            <td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/poista/{id}(id=${lento.id})}" class="btn btn-danger">Poista</a></td>
             
             
             
@@ -44,6 +44,12 @@
 
      <td ><a th:href="@{/lisaalento}" class="btn btn-success">Lisää lento</a></td>
      <td sec:authorize="hasAuthority('ADMIN')" ><a th:href="@{/lisaalentopaikka}" class="btn btn-success">Lisää lentopaikka</a></td>
+
+     <div class="col-md-4" style="padding:20px 0">
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Sign Out" class="btn btn-sm btn-danger"/>
+		</form>
+	</div>
 
      	
 

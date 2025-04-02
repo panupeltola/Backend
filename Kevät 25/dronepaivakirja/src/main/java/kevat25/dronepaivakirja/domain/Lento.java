@@ -26,8 +26,10 @@ public class Lento {
     public Lento() {
     }
 
-    
 
+    public Lento(String lentaja) {
+        this.lentaja = lentaja;
+    }
 
 
     public Lento(String lentaja, String aika, String pvm, Lentopaikka lentopaikka, double lampoTila) {

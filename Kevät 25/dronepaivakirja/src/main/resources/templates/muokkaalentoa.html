@@ -1,37 +1,122 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Lentolista</title>
+    <title>Muokkaa Lentoa</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            padding-top: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #343a40;
+            margin-bottom: 30px;
+        }
+
+        .table {
+            width: 80%;
+            margin: 0 auto;
+            margin-bottom: 30px;
+        }
+
+        .table th, .table td {
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .table th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .table td {
+            background-color: #f1f1f1;
+        }
+
+        .card {
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            text-transform: uppercase;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 14px;
+            color: #6c757d;
+        }
+    </style>
 </head>
+
 <body>
-	<h1>Muokkaa lentoa</h1>
-	<div>
-		<form th:object="${lento}" th:action="@{/tallennalento}" action="#" method="post">
-		  	<label for="tname">Lentaja</label>
-			<input type="text" id="lname" th:field="*{lentaja}" />
-			<div style="clear: both; display: block; height: 10px;"></div>
-		  	<label for="aname">Päivämäärä</label>
-			<input type="text" id="pvm" th:field="*{pvm}" />
-			<div style="clear: both; display: block; height: 10px;"></div>
-		  	<label for="pyear">Aika</label>
-			<input type="text" th:field="*{aika}" />
+    <div class="container">
+        <h1>Muokkaa Lentoa</h1>
 
-            <div style="clear: both; display: block; height: 10px;"></div>						
-		  	<label for="catlist">Lentopaikka</label>
-			 <select id="catlist" th:field="*{lentopaikka}" class="form-control">
-       			<option th:each="lentopaikka: ${lentopaikat}" th:value="${lentopaikka.lentopaikkaId}" th:text="${lentopaikka.nimi}"></option>
-    		</select>
+        <div class="card">
+            <form th:object="${lento}" th:action="@{/tallennalento}" method="post">
+                <input type="hidden" id="id" th:field="*{id}" readonly="readonly" />
+                <div style="clear: both; display: block; height: 10px;"></div>
 
-			<div style="clear: both; display: block; height: 10px;"></div>
-            <label for="isbn">Lämpötila</label>
-			<input type="text" th:field="*{lampoTila}" />
-			<div style="clear: both; display: block; height: 10px;"></div>
+                <label for="lname">Lentäjä</label>
+                <input type="text" id="lname" th:field="*{lentaja}" class="form-control" />
 
+                <div style="clear: both; display: block; height: 10px;"></div>
 
-			<div style="clear: both; display: block; height: 10px;"></div>
-			<input type="submit" value="Tallenna"></input>
-		</form>
-	</div>
+                <label for="pvm">Päivämäärä</label>
+                <input type="text" id="pvm" th:field="*{pvm}" class="form-control" />
+
+                <div style="clear: both; display: block; height: 10px;"></div>
+
+                <label for="aika">Aika</label>
+                <input type="text" id="aika" th:field="*{aika}" class="form-control" />
+
+                <div style="clear: both; display: block; height: 10px;"></div>
+
+                <label for="catlist">Lentopaikka</label>
+                <select id="catlist" th:field="*{lentopaikka}" class="form-control">
+                    <option th:each="lentopaikka : ${lentopaikat}" th:value="${lentopaikka.lentopaikkaId}" th:text="${lentopaikka.nimi}"></option>
+                </select>
+
+                <div style="clear: both; display: block; height: 10px;"></div>
+
+                <label for="lampoTila">Lämpötila</label>
+                <input type="text" id="lampoTila" th:field="*{lampoTila}" class="form-control" />
+
+                <div style="clear: both; display: block; height: 10px;"></div>
+
+                <input type="submit" value="Tallenna" class="btn" />
+            </form>
+        </div>
+
+        <a href="/lentolista" class="btn back-btn">Takaisin</a>
+
+        <footer>
+            <p>&copy; 2025 Panu Peltola.</p>
+        </footer>
+    </div>
 </body>
 </html>

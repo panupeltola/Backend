@@ -1,30 +1,124 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Lentolista</title>
+    <title>Lisää Lentopaikka</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            padding-top: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #343a40;
+            margin-bottom: 30px;
+        }
+
+        .table {
+            width: 80%;
+            margin: 0 auto;
+            margin-bottom: 30px;
+        }
+
+        .table th, .table td {
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .table th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .table td {
+            background-color: #f1f1f1;
+        }
+
+        #map {
+            width: 100%;
+            height: 400px;
+            margin: 0 auto;
+            border: 2px solid #007bff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+
+        .card {
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            text-transform: uppercase;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 14px;
+            color: #6c757d;
+        }
+    </style>
 </head>
+
 <body>
-	<h1>Lisää lentopaikka</h1>
-	<div>
-		<form th:object="${lentopaikka}" th:action="@{/tallennalentopaikka}" action="#" method="post">
-		  	<label for="tname">Nimi</label>
-			<input type="text" id="lpname" th:field="*{nimi}" />
-			<div style="clear: both; display: block; height: 10px;"></div>
-		  	<label for="aname">Kaupunki</label>
-			<input type="text" id="kaupunki" th:field="*{kaupunki}" />
-			<div style="clear: both; display: block; height: 10px;"></div>
-		  	<label for="pyear">Pohjoinen</label>
-			<input type="text" th:field="*{northing}" />
-			<div style="clear: both; display: block; height: 10px;"></div>
-            <label for="isbn">Itä</label>
-			<input type="text" th:field="*{easting}" />
-			<div style="clear: both; display: block; height: 10px;"></div>
+    <div class="container">
+        <h1>Lisää Lentopaikka</h1>
 
+        <div class="card">
+            <form th:object="${lentopaikka}" th:action="@{/tallennalentopaikka}" method="post">
+                <div style="clear: both; display: block; height: 10px;"></div>
 
-			<div style="clear: both; display: block; height: 10px;"></div>
-			<input type="submit" value="Tallenna"></input>
-		</form>
-	</div>
+                <label for="lpname">Nimi</label>
+                <input type="text" id="lpname" th:field="*{nimi}" class="form-control" />
+
+                <div style="clear: both; display: block; height: 10px;"></div>
+
+                <label for="kaupunki">Kaupunki</label>
+                <input type="text" id="kaupunki" th:field="*{kaupunki}" class="form-control" />
+
+                <div style="clear: both; display: block; height: 10px;"></div>
+
+                <label for="northing">Pohjoinen</label>
+                <input type="text" id="northing" th:field="*{northing}" class="form-control" />
+
+                <div style="clear: both; display: block; height: 10px;"></div>
+
+                <label for="easting">Itä</label>
+                <input type="text" id="easting" th:field="*{easting}" class="form-control" />
+
+                <div style="clear: both; display: block; height: 10px;"></div>
+
+                <input type="submit" value="Tallenna" class="btn" />
+            </form>
+        </div>
+
+        <a href="/lentolista" class="btn back-btn">Takaisin</a>
+
+        <footer>
+            <p>&copy; 2025 Panu Peltola.</p>
+        </footer>
+    </div>
 </body>
 </html>

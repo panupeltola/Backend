@@ -67,8 +67,10 @@ public class LentoController {
         String kayttajanimi = kayttaja.getUsername();
         Kayttaja kirjautunutKayttaja = KRepo.findByUsername(kayttajanimi);
 
-    	model.addAttribute("lento", new Lento());
-        model.addAttribute("lentaja", kirjautunutKayttaja.getHenkilonimi());
+        Lento uusiLento = new Lento(kirjautunutKayttaja.getHenkilonimi());
+        
+
+    	model.addAttribute("lento", uusiLento);
         model.addAttribute("lentopaikat", paikkaRepo.findAll());
         return "lisaalento";
     }
@@ -81,7 +83,7 @@ public class LentoController {
     
     @PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping(value = "/lisaalentopaikka")
-    public String addStudent(Model model){
+    public String lisaaLentopaikka(Model model){
     	model.addAttribute("lentopaikka", new Lentopaikka());
         return "lisaalentopaikka";
     }
@@ -106,8 +108,8 @@ public String naytaLento(@PathVariable("id") Long id, Model model) {
 
 @PreAuthorize("hasAuthority('ADMIN')")
 @RequestMapping(value = "/muokkaa/{id}")
-    public String editBook(@PathVariable("id") Long bookId, Model model) {
-        model.addAttribute("lento", lentoRepo.findById(bookId));
+    public String muokkaaLentoa(@PathVariable("id") Long Id, Model model) {
+        model.addAttribute("lento", lentoRepo.findById(Id));
         model.addAttribute("lentopaikat", paikkaRepo.findAll());
         return "muokkaalentoa";
 
@@ -116,9 +118,9 @@ public String naytaLento(@PathVariable("id") Long id, Model model) {
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping(value = "/poista/{id}", method = RequestMethod.GET)
-    public String deleteBook(@PathVariable("id") Long Id, Model model) {
+    public String poistaLento(@PathVariable("id") Long Id, Model model) {
     	lentoRepo.deleteById(Id);
-        return "redirect:../booklist";
+        return "redirect:../lentolista";
     }
 
 @RequestMapping(value="/login")

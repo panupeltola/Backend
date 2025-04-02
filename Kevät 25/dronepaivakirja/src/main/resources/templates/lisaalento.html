@@ -1,37 +1,106 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Lentolista</title>
+    <title>Lisää Lento</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            padding-top: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #343a40;
+            margin-bottom: 30px;
+        }
+
+        .form-container {
+            width: 80%;
+            margin: 0 auto;
+            margin-bottom: 30px;
+        }
+
+        .form-container input,
+        .form-container select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+        }
+
+        .form-container input[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .form-container input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 14px;
+            color: #6c757d;
+        }
+    </style>
 </head>
+
 <body>
-	<h1>Lisää lento</h1>
-	<div>
-		<form th:object="${lento}" th:action="@{/tallennalento}" action="#" method="post">
-			<label for="lname">Lentäjä</label>
-			<input type="text" id="lname" th:value="${lentaja}" readonly="readonly" />
-			<div style="clear: both; display: block; height: 10px;"></div>
-		  	<label for="aname">Päivämäärä</label>
-			<input type="text" id="pvm" th:field="*{pvm}" />
-			<div style="clear: both; display: block; height: 10px;"></div>
-		  	<label for="pyear">Aika</label>
-			<input type="text" th:field="*{aika}" />
+    <div class="container">
+        <h1>Lisää Lento</h1>
 
-            <div style="clear: both; display: block; height: 10px;"></div>						
-		  	<label for="catlist">Lentopaikka</label>
-			 <select id="catlist" th:field="*{lentopaikka}" class="form-control">
-       			<option th:each="lentopaikka: ${lentopaikat}" th:value="${lentopaikka.lentopaikkaId}" th:text="${lentopaikka.nimi}"></option>
-    		</select>
+        <div class="form-container">
+            <form th:object="${lento}" th:action="@{/tallennalento}" method="post">
+                <!-- Hidden field for lentaja -->
+                <input type="hidden" th:field="*{lentaja}" th:value="${lentajanimi}" />
+                
+                <div style="clear: both; display: block; height: 10px;"></div>
 
-			<div style="clear: both; display: block; height: 10px;"></div>
-            <label for="isbn">Lämpötila</label>
-			<input type="text" th:field="*{lampoTila}" />
-			<div style="clear: both; display: block; height: 10px;"></div>
+                <!-- Päivämäärä (Date) input -->
+                <label for="pvm">Päivämäärä</label>
+                <input type="text" id="pvm" th:field="*{pvm}" class="form-control" />
+                
+                <div style="clear: both; display: block; height: 10px;"></div>
 
+                <!-- Aika (Time) input -->
+                <label for="aika">Aika</label>
+                <input type="text" id="aika" th:field="*{aika}" class="form-control" />
 
-			<div style="clear: both; display: block; height: 10px;"></div>
-			<input type="submit" value="Tallenna"></input>
-		</form>
-	</div>
+                <div style="clear: both; display: block; height: 10px;"></div>
+
+                <!-- Lentopaikka (Location) select -->
+                <label for="catlist">Lentopaikka</label>
+                <select id="catlist" th:field="*{lentopaikka}" class="form-control">
+                    <option th:each="lentopaikka: ${lentopaikat}" th:value="${lentopaikka.lentopaikkaId}" th:text="${lentopaikka.nimi}"></option>
+                </select>
+
+                <div style="clear: both; display: block; height: 10px;"></div>
+
+                <!-- Lämpötila (Temperature) input -->
+                <label for="lampoTila">Lämpötila</label>
+                <input type="text" id="lampoTila" th:field="*{lampoTila}" class="form-control" />
+
+                <div style="clear: both; display: block; height: 10px;"></div>
+
+                <!-- Submit button -->
+                <input type="submit" value="Tallenna" class="btn" />
+            </form>
+        </div>
+
+		<a href="/lentolista" class="btn back-btn">Takaisin</a>
+
+        <footer>
+            <p>&copy; 2025 Panu Peltola.</p>
+        </footer>
+    </div>
 </body>
 </html>
