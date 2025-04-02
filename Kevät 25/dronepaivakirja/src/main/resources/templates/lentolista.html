@@ -31,7 +31,8 @@
             <td th:text="${lento.lampoTila} + ' °C'"></td>
 
             <td><a th:href="@{/nayta/{id}(id=${lento.id})}" class="btn btn-success">Näytä</a></td>
-            <td><a th:href="@{/muokkaa/{id}(id=${lento.id})}" class="btn btn-secondary">Muokkaa</a></td>
+            <td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/muokkaa/{id}(id=${lento.id})}" class="btn btn-secondary">Muokkaa</a></td>
+            <td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{id}(id=${book.id})}" class="btn btn-danger">Poista</a></td>
             
             
             
@@ -42,7 +43,7 @@
      </table>
 
      <td ><a th:href="@{/lisaalento}" class="btn btn-success">Lisää lento</a></td>
-     <td ><a th:href="@{/lisaalentopaikka}" class="btn btn-success">Lisää lentopaikka</a></td>
+     <td sec:authorize="hasAuthority('ADMIN')" ><a th:href="@{/lisaalentopaikka}" class="btn btn-success">Lisää lentopaikka</a></td>
 
      	
 

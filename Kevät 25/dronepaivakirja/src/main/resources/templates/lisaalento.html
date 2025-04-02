@@ -8,8 +8,8 @@
 	<h1>Lisää lento</h1>
 	<div>
 		<form th:object="${lento}" th:action="@{/tallennalento}" action="#" method="post">
-		  	<label for="tname">Lentaja</label>
-			<input type="text" id="lname" th:field="*{lentaja}" />
+			<label for="lname">Lentäjä</label>
+			<input type="text" id="lname" th:value="${lentaja}" readonly="readonly" />
 			<div style="clear: both; display: block; height: 10px;"></div>
 		  	<label for="aname">Päivämäärä</label>
 			<input type="text" id="pvm" th:field="*{pvm}" />
